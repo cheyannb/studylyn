@@ -47,9 +47,13 @@ export default function PracticeTests() {
 
   const getTestStats = (category) => {
     const categoryTests = allTests.filter(t => t.category === category);
-    const freeTests = categoryTests.filter(t => !t.is_premium).length;
-    const premiumTests = categoryTests.filter(t => t.is_premium).length;
-    return { total: categoryTests.length, free: freeTests, premium: premiumTests };
+    const uniqueTests = [...new Set(categoryTests.map(t => t.test_number))];
+    const freeTests = uniqueTests.filter(testNum => {
+      const test = categoryTests.find(t => t.test_number === testNum);
+      return test && !test.is_premium;
+    }).length;
+    const premiumTests = uniqueTests.length - freeTests;
+    return { total: uniqueTests.length, free: freeTests, premium: premiumTests };
   };
 
   return (
@@ -87,7 +91,7 @@ export default function PracticeTests() {
                   <div className="p-6">
                     <div className="flex items-center justify-between mb-4">
                       <div className="text-sm text-slate-500">
-                        {stats.total} questions available
+                        {stats.total} tests available
                       </div>
                       <div className="flex items-center gap-2">
                         <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">
@@ -105,9 +109,9 @@ export default function PracticeTests() {
                         Coming Soon
                       </Button>
                     ) : (
-                      <Link to={createPageUrl(`TakePracticeTest?category=${category.id}`)}>
+                      <Link to={createPageUrl(`SelectPracticeTest?category=${category.id}`)}>
                         <Button className="w-full bg-indigo-600 hover:bg-indigo-700 gap-2">
-                          Start Practice
+                          View Tests
                           <ArrowRight className="w-4 h-4" />
                         </Button>
                       </Link>

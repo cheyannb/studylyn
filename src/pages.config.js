@@ -10,6 +10,7 @@ import StudyFlashcard from './pages/StudyFlashcard';
 import StudyLearn from './pages/StudyLearn';
 import StudyTest from './pages/StudyTest';
 import TakePracticeTest from './pages/TakePracticeTest';
+import SelectPracticeTest from './pages/SelectPracticeTest';
 import __Layout from './Layout.jsx';
 
 
@@ -26,6 +27,7 @@ export const PAGES = {
     "StudyLearn": StudyLearn,
     "StudyTest": StudyTest,
     "TakePracticeTest": TakePracticeTest,
+    "SelectPracticeTest": SelectPracticeTest,
 }
 
 export const pagesConfig = {

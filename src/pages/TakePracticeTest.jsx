@@ -12,6 +12,7 @@ import confetti from 'canvas-confetti';
 export default function TakePracticeTest() {
   const urlParams = new URLSearchParams(window.location.search);
   const category = urlParams.get('category');
+  const testNumber = parseInt(urlParams.get('test'));
 
   const [user, setUser] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -24,12 +25,13 @@ export default function TakePracticeTest() {
     base44.auth.me().then(setUser);
   }, []);
 
-  const { data: questions = [], isLoading } = useQuery({
-    queryKey: ['practice-test-questions', category],
-    queryFn: () => base44.entities.PracticeTest.filter({ category }, 'question_number'),
-    enabled: !!category,
+  const { data: allQuestions = [], isLoading } = useQuery({
+    queryKey: ['practice-test-questions', category, testNumber],
+    queryFn: () => base44.entities.PracticeTest.filter({ category, test_number: testNumber }, 'question_number'),
+    enabled: !!category && !!testNumber,
   });
 
+  const questions = allQuestions;
   const isPremium = user?.subscription_type === 'monthly' || user?.subscription_type === 'lifetime';
   const currentQuestion = questions[currentIndex];
   const isLocked = currentQuestion?.is_premium && !isPremium;
@@ -140,9 +142,9 @@ export default function TakePracticeTest() {
           </div>
 
           <div className="flex flex-col gap-3">
-            <Link to={createPageUrl('PracticeTests')}>
+            <Link to={createPageUrl(`SelectPracticeTest?category=${category}`)}>
               <Button className="w-full bg-indigo-600 hover:bg-indigo-700">
-                Back to Practice Tests
+                Back to Tests
               </Button>
             </Link>
             <Button variant="outline" onClick={() => window.location.reload()}>
@@ -159,13 +161,13 @@ export default function TakePracticeTest() {
       <div className="bg-white border-b border-slate-200 sticky top-0 z-10">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
-            <Link to={createPageUrl('PracticeTests')}>
+            <Link to={createPageUrl(`SelectPracticeTest?category=${category}`)}>
               <Button variant="ghost" size="icon">
                 <ArrowLeft className="w-5 h-5" />
               </Button>
             </Link>
             <div className="text-center flex-1">
-              <div className="text-sm text-slate-500">{category} Practice Test</div>
+              <div className="text-sm text-slate-500">{category} Test {testNumber}</div>
               <div className="font-semibold text-slate-900">
                 Question {currentIndex + 1} of {questions.length}
               </div>
