@@ -86,8 +86,8 @@ export default function Layout({ children, currentPageName }) {
                 </div>
               )}
 
-              {/* User Menu */}
-              {user && (
+              {/* Login/User Menu */}
+              {user ? (
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button variant="ghost" className="relative h-10 w-10 rounded-full">
@@ -134,10 +134,17 @@ export default function Layout({ children, currentPageName }) {
                       Sign out
                     </DropdownMenuItem>
                   </DropdownMenuContent>
-                </DropdownMenu>
-              )}
+                  </DropdownMenu>
+                  ) : (
+                  <Button 
+                  onClick={() => base44.auth.redirectToLogin()}
+                  className="bg-indigo-600 hover:bg-indigo-700"
+                  >
+                  Log In
+                  </Button>
+                  )}
 
-              {/* Mobile menu button */}
+                  {/* Mobile menu button */}
               <Button
                 variant="ghost"
                 size="icon"
