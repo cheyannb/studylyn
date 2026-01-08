@@ -13,6 +13,7 @@ import { toast } from 'sonner';
 export default function Pricing() {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [isCancelling, setIsCancelling] = useState(false);
 
   useEffect(() => {
     base44.auth.me().then(setUser);
@@ -46,6 +47,28 @@ export default function Pricing() {
       toast.error('Failed to process subscription');
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleCancelSubscription = async () => {
+    if (!confirm('Are you sure you want to cancel your subscription? You will retain access until the end of your billing period.')) {
+      return;
+    }
+
+    setIsCancelling(true);
+    try {
+      const response = await base44.functions.invoke('cancelSubscription');
+
+      if (response.data?.success) {
+        toast.success('Subscription cancelled. You will retain access until the end of your billing period.');
+      } else {
+        toast.error(response.data?.error || 'Failed to cancel subscription');
+      }
+    } catch (error) {
+      console.error('Cancel error:', error);
+      toast.error('Failed to cancel subscription');
+    } finally {
+      setIsCancelling(false);
     }
   };
 
@@ -118,11 +141,23 @@ export default function Pricing() {
                 ? 'You have lifetime access to all premium features.'
                 : 'Your monthly subscription is active.'}
             </p>
-            <Link to={createPageUrl('Home')}>
-              <Button className="bg-white text-indigo-600 hover:bg-indigo-50">
-                Start Studying
-              </Button>
-            </Link>
+            <div className="flex flex-col gap-3">
+              <Link to={createPageUrl('Home')}>
+                <Button className="w-full bg-white text-indigo-600 hover:bg-indigo-50">
+                  Start Studying
+                </Button>
+              </Link>
+              {user?.subscription_type === 'monthly' && (
+                <Button
+                  variant="outline"
+                  onClick={handleCancelSubscription}
+                  disabled={isCancelling}
+                  className="w-full bg-white/10 text-white border-white/30 hover:bg-white/20"
+                >
+                  {isCancelling ? 'Cancelling...' : 'Cancel Subscription'}
+                </Button>
+              )}
+            </div>
           </motion.div>
         ) : (
           <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
