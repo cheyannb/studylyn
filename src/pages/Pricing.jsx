@@ -20,6 +20,13 @@ export default function Pricing() {
   }, []);
 
   const handleSubscribe = async (type) => {
+    // Check if user is logged in
+    if (!user) {
+      toast.error('Please log in to subscribe');
+      base44.auth.redirectToLogin(window.location.pathname);
+      return;
+    }
+
     // Check if running in iframe
     if (window.self !== window.top) {
       toast.error('Checkout only works from the published app. Please open the app in a new tab.');
