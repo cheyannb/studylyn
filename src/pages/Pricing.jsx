@@ -137,7 +137,17 @@ export default function Pricing() {
           >
             Unlock advanced features and supercharge your learning with AI-powered tools
           </motion.p>
-        </div>
+          {!user && (
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="text-sm text-indigo-600 bg-indigo-50 px-4 py-2 rounded-full max-w-md mx-auto mt-4"
+            >
+              Note: You'll need to create an account or log in to subscribe
+            </motion.p>
+          )}
+          </div>
 
         {isPremium ? (
           <motion.div
