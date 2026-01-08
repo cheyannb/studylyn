@@ -25,7 +25,7 @@ export default function Layout({ children, currentPageName }) {
     base44.auth.me().then(setUser).catch(() => {});
   }, []);
 
-  const isFullScreenPage = ['StudyFlashcard', 'StudyLearn', 'StudyTest'].includes(currentPageName);
+  const isFullScreenPage = ['StudyFlashcard', 'StudyLearn', 'StudyTest', 'TakePracticeTest'].includes(currentPageName);
   
   if (isFullScreenPage) {
     return <>{children}</>;
@@ -34,6 +34,7 @@ export default function Layout({ children, currentPageName }) {
   const navigation = [
     { name: 'Home', href: createPageUrl('Home'), icon: Home },
     { name: 'Explore', href: createPageUrl('Explore'), icon: Compass },
+    { name: 'Practice Tests', href: createPageUrl('PracticeTests'), icon: Trophy },
     { name: 'Leaderboard', href: createPageUrl('Leaderboard'), icon: TrendingUp },
     { name: 'Pricing', href: createPageUrl('Pricing'), icon: Crown },
   ];

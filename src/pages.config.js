@@ -8,6 +8,8 @@ import StudyLearn from './pages/StudyLearn';
 import StudyTest from './pages/StudyTest';
 import Leaderboard from './pages/Leaderboard';
 import Achievements from './pages/Achievements';
+import PracticeTests from './pages/PracticeTests';
+import TakePracticeTest from './pages/TakePracticeTest';
 import __Layout from './Layout.jsx';
 
 
@@ -22,6 +24,8 @@ export const PAGES = {
     "StudyTest": StudyTest,
     "Leaderboard": Leaderboard,
     "Achievements": Achievements,
+    "PracticeTests": PracticeTests,
+    "TakePracticeTest": TakePracticeTest,
 }
 
 export const pagesConfig = {
