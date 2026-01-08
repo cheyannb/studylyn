@@ -37,7 +37,7 @@ export default function Pricing() {
     try {
       const priceId = type === 'monthly' 
         ? 'price_1Sn7y2I3Tb1fjcHfaYCPmH22' 
-        : 'price_1Sn7y2I3Tb1fjcHftjSHqkgU';
+        : 'price_1Sn90QI3Tb1fjcHf5yJSnwBT';
 
       const response = await base44.functions.invoke('createCheckout', {
         priceId,
