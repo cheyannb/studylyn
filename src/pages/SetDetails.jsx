@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
@@ -39,8 +39,13 @@ export default function SetDetails() {
   const [deleteCard, setDeleteCard] = useState(null);
   const [editingSet, setEditingSet] = useState(null);
   const [isGenerating, setIsGenerating] = useState(false);
+  const [user, setUser] = useState(null);
 
   const queryClient = useQueryClient();
+
+  useEffect(() => {
+    base44.auth.me().then(setUser);
+  }, []);
 
   const { data: set, isLoading: setLoading } = useQuery({
     queryKey: ['flashcard-set', setId],
@@ -138,6 +143,14 @@ export default function SetDetails() {
   };
 
   const handleGenerateWithAI = async () => {
+    const isPremium = user?.subscription_type === 'monthly' || user?.subscription_type === 'lifetime';
+    
+    if (!isPremium) {
+      toast.error('AI generation is a Premium feature');
+      window.location.href = createPageUrl('Pricing');
+      return;
+    }
+
     const topic = prompt('Enter a topic to generate flashcards:');
     if (!topic) return;
 
