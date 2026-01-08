@@ -19,15 +19,30 @@ export default function Pricing() {
   }, []);
 
   const handleSubscribe = async (type) => {
+    // Check if running in iframe
+    if (window.self !== window.top) {
+      toast.error('Checkout only works from the published app. Please open the app in a new tab.');
+      return;
+    }
+
     setIsLoading(true);
     try {
-      await base44.auth.updateMe({
-        subscription_type: type,
-        subscription_start: new Date().toISOString(),
+      const priceId = type === 'monthly' 
+        ? 'price_1Sn7IxAKCM31iqaNZwmj6pIX' 
+        : 'price_1Sn7IxAKCM31iqaNpPUZof0Y';
+
+      const response = await base44.functions.invoke('createCheckout', {
+        priceId,
+        subscriptionType: type,
       });
-      setUser({ ...user, subscription_type: type });
-      toast.success(`Successfully upgraded to ${type === 'monthly' ? 'Monthly' : 'Lifetime'} plan!`);
+
+      if (response.data?.url) {
+        window.location.href = response.data.url;
+      } else {
+        toast.error('Failed to create checkout session');
+      }
     } catch (error) {
+      console.error('Checkout error:', error);
       toast.error('Failed to process subscription');
     } finally {
       setIsLoading(false);
