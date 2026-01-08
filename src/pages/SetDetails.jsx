@@ -6,7 +6,7 @@ import { createPageUrl } from '@/utils';
 import { 
   ArrowLeft, Plus, Play, BookOpen, FileText, 
   MoreVertical, Edit2, Trash2, Layers, Sparkles,
-  Upload, Download, Loader2
+  Upload, Download, Loader2, Crown
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -275,7 +275,7 @@ export default function SetDetails() {
               variant="outline"
               onClick={handleGenerateWithAI}
               disabled={isGenerating}
-              className="gap-2"
+              className="gap-2 relative"
             >
               {isGenerating ? (
                 <Loader2 className="w-4 h-4 animate-spin" />
@@ -283,6 +283,9 @@ export default function SetDetails() {
                 <Sparkles className="w-4 h-4" />
               )}
               AI Generate
+              {!(user?.subscription_type === 'monthly' || user?.subscription_type === 'lifetime') && (
+                <Crown className="w-3 h-3 text-amber-500" />
+              )}
             </Button>
             
             <input
