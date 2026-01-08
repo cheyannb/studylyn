@@ -4,7 +4,7 @@ import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
 import { 
   Home, Compass, Settings, Crown, LogOut, 
-  Menu, X, Layers, User
+  Menu, X, Layers, User, TrendingUp, Zap
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
@@ -15,6 +15,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { Trophy } from 'lucide-react';
 
 export default function Layout({ children, currentPageName }) {
   const [user, setUser] = useState(null);
@@ -33,6 +34,7 @@ export default function Layout({ children, currentPageName }) {
   const navigation = [
     { name: 'Home', href: createPageUrl('Home'), icon: Home },
     { name: 'Explore', href: createPageUrl('Explore'), icon: Compass },
+    { name: 'Leaderboard', href: createPageUrl('Leaderboard'), icon: TrendingUp },
     { name: 'Pricing', href: createPageUrl('Pricing'), icon: Crown },
   ];
 
@@ -99,8 +101,23 @@ export default function Layout({ children, currentPageName }) {
                     <div className="px-3 py-2">
                       <p className="text-sm font-medium text-slate-900">{user.full_name || 'User'}</p>
                       <p className="text-xs text-slate-500 truncate">{user.email}</p>
+                      <div className="flex items-center gap-2 mt-2">
+                        <div className="flex items-center gap-1 text-xs bg-indigo-100 text-indigo-700 px-2 py-1 rounded-full">
+                          <Zap className="w-3 h-3" />
+                          <span>Lvl {user.level || 1}</span>
+                        </div>
+                        <div className="text-xs text-slate-500">
+                          {(user.points || 0).toLocaleString()} pts
+                        </div>
+                      </div>
                     </div>
                     <DropdownMenuSeparator />
+                    <DropdownMenuItem asChild>
+                      <Link to={createPageUrl('Achievements')} className="flex items-center gap-2">
+                        <Trophy className="w-4 h-4" />
+                        Achievements
+                      </Link>
+                    </DropdownMenuItem>
                     <DropdownMenuItem asChild>
                       <Link to={createPageUrl('Settings')} className="flex items-center gap-2">
                         <Settings className="w-4 h-4" />
