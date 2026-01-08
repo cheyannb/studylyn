@@ -48,10 +48,24 @@ export default function Home() {
   });
 
   const createMutation = useMutation({
-    mutationFn: (data) => base44.entities.FlashcardSet.create(data),
+    mutationFn: (data) => {
+      const isPremium = user?.subscription_type === 'monthly' || user?.subscription_type === 'lifetime';
+      if (!isPremium && sets.length >= 10) {
+        throw new Error('Free users are limited to 10 study sets. Upgrade to Premium for unlimited sets!');
+      }
+      return base44.entities.FlashcardSet.create(data);
+    },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['flashcard-sets'] });
       setShowCreateDialog(false);
+    },
+    onError: (error) => {
+      toast.error(error.message);
+      if (error.message.includes('Upgrade to Premium')) {
+        setTimeout(() => {
+          window.location.href = createPageUrl('Pricing');
+        }, 2000);
+      }
     },
   });
 
