@@ -232,7 +232,7 @@ export default function Pricing() {
               <div className="text-center mb-6">
                 <h3 className="text-lg font-semibold mb-2">Lifetime</h3>
                 <div className="flex items-baseline justify-center gap-1">
-                  <span className="text-4xl font-bold">$100</span>
+                  <span className="text-4xl font-bold">$99.99</span>
                   <span className="text-indigo-200">one-time</span>
                 </div>
                 <p className="text-sm text-indigo-200 mt-2">Pay once, own forever</p>
