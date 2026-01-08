@@ -49,7 +49,7 @@ export default function Layout({ children, currentPageName }) {
               <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
                 <Layers className="w-5 h-5 text-white" />
               </div>
-              <span className="text-xl font-bold text-slate-900 hidden sm:block">StudyCards</span>
+              <span className="text-xl font-bold text-slate-900 hidden sm:block">studyLyn</span>
             </Link>
 
             {/* Desktop Navigation */}

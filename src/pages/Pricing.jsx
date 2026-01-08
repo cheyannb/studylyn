@@ -70,7 +70,7 @@ export default function Pricing() {
             className="inline-flex items-center gap-2 bg-indigo-100 text-indigo-700 px-4 py-2 rounded-full text-sm font-medium mb-6"
           >
             <Crown className="w-4 h-4" />
-            StudyCards Premium
+            studyLyn Premium
           </motion.div>
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
@@ -78,7 +78,7 @@ export default function Pricing() {
             transition={{ delay: 0.1 }}
             className="text-3xl md:text-4xl font-bold text-slate-900 mb-4"
           >
-            Learn faster with Premium
+            Learn smarter with Premium
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -212,7 +212,7 @@ export default function Pricing() {
               },
               {
                 q: 'Is there a free trial?',
-                a: 'You can use StudyCards for free with basic features. Premium unlocks advanced AI features and unlimited sets.'
+                a: 'You can use studyLyn for free with basic features. Premium unlocks advanced AI features and unlimited sets.'
               },
             ].map((faq, index) => (
               <div key={index} className="bg-white rounded-xl border border-slate-200 p-6">
