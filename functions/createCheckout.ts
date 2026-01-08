@@ -9,14 +9,23 @@ Deno.serve(async (req) => {
     const user = await base44.auth.me();
 
     if (!user) {
+      console.error('Authentication failed: No user found');
       return Response.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     const { priceId, subscriptionType } = await req.json();
 
     if (!priceId || !subscriptionType) {
+      console.error('Missing parameters:', { priceId, subscriptionType });
       return Response.json({ error: 'Missing priceId or subscriptionType' }, { status: 400 });
     }
+
+    console.log('Creating checkout session:', { 
+      priceId, 
+      subscriptionType, 
+      email: user.email,
+      userId: user.id 
+    });
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
@@ -37,6 +46,7 @@ Deno.serve(async (req) => {
       },
     });
 
+    console.log('Checkout session created successfully:', session.id);
     return Response.json({ url: session.url });
   } catch (error) {
     console.error('Stripe checkout error:', error);

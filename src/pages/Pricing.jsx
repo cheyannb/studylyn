@@ -37,14 +37,18 @@ export default function Pricing() {
         subscriptionType: type,
       });
 
+      console.log('Checkout response:', response);
+
       if (response.data?.url) {
+        console.log('Redirecting to Stripe checkout:', response.data.url);
         window.location.href = response.data.url;
       } else {
+        console.error('No URL in response:', response);
         toast.error('Failed to create checkout session');
       }
     } catch (error) {
       console.error('Checkout error:', error);
-      toast.error('Failed to process subscription');
+      toast.error(error.message || 'Failed to process subscription');
     } finally {
       setIsLoading(false);
     }
