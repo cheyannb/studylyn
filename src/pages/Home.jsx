@@ -38,8 +38,11 @@ export default function Home() {
   }, []);
 
   const { data: sets = [], isLoading: setsLoading } = useQuery({
-    queryKey: ['flashcard-sets'],
-    queryFn: () => base44.entities.FlashcardSet.list('-created_date'),
+    queryKey: ['flashcard-sets', user?.email],
+    queryFn: () => user?.email 
+      ? base44.entities.FlashcardSet.filter({ created_by: user.email }, '-created_date')
+      : Promise.resolve([]),
+    enabled: !!user,
   });
 
   const { data: sessions = [] } = useQuery({

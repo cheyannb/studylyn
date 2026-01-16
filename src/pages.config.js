@@ -4,13 +4,13 @@ import Home from './pages/Home';
 import Leaderboard from './pages/Leaderboard';
 import PracticeTests from './pages/PracticeTests';
 import Pricing from './pages/Pricing';
+import SelectPracticeTest from './pages/SelectPracticeTest';
 import SetDetails from './pages/SetDetails';
 import Settings from './pages/Settings';
 import StudyFlashcard from './pages/StudyFlashcard';
 import StudyLearn from './pages/StudyLearn';
 import StudyTest from './pages/StudyTest';
 import TakePracticeTest from './pages/TakePracticeTest';
-import SelectPracticeTest from './pages/SelectPracticeTest';
 import __Layout from './Layout.jsx';
 
 
@@ -21,13 +21,13 @@ export const PAGES = {
     "Leaderboard": Leaderboard,
     "PracticeTests": PracticeTests,
     "Pricing": Pricing,
+    "SelectPracticeTest": SelectPracticeTest,
     "SetDetails": SetDetails,
     "Settings": Settings,
     "StudyFlashcard": StudyFlashcard,
     "StudyLearn": StudyLearn,
     "StudyTest": StudyTest,
     "TakePracticeTest": TakePracticeTest,
-    "SelectPracticeTest": SelectPracticeTest,
 }
 
 export const pagesConfig = {
