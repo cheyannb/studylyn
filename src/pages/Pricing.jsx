@@ -71,7 +71,15 @@ export default function Pricing() {
       const response = await base44.functions.invoke('cancelSubscription');
 
       if (response.data?.success) {
-        toast.success('Subscription cancelled. You will retain access until the end of your billing period.');
+        const cancelDate = response.data?.cancel_at 
+          ? new Date(response.data.cancel_at * 1000).toLocaleDateString()
+          : 'the end of your billing period';
+        
+        toast.success(
+          `Subscription cancelled. You'll retain full access until ${cancelDate}.`,
+          { duration: 5000 }
+        );
+        
         // Refresh user data
         const updatedUser = await base44.auth.me();
         setUser(updatedUser);
