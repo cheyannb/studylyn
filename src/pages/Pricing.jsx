@@ -171,6 +171,8 @@ export default function Pricing() {
             <p className="text-indigo-100 mb-4">
               {user?.subscription_type === 'lifetime' 
                 ? 'You have lifetime access to all premium features.'
+                : user?.subscription_cancel_at
+                ? `Your subscription will cancel on ${new Date(user.subscription_cancel_at * 1000).toLocaleDateString()}. You'll retain access until then.`
                 : 'Your monthly subscription is active.'}
             </p>
             <div className="flex flex-col gap-3">
@@ -179,7 +181,7 @@ export default function Pricing() {
                   Start Studying
                 </Button>
               </Link>
-              {user?.subscription_type === 'monthly' && (
+              {user?.subscription_type === 'monthly' && !user?.subscription_cancel_at && (
                 <Button
                   variant="outline"
                   onClick={handleCancelSubscription}

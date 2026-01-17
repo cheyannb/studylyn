@@ -48,16 +48,21 @@ Deno.serve(async (req) => {
     const subscription = subscriptions.data[0];
 
     // Cancel at period end (not immediately)
-    await stripe.subscriptions.update(subscription.id, {
+    const updatedSubscription = await stripe.subscriptions.update(subscription.id, {
       cancel_at_period_end: true,
     });
 
-    console.log('Subscription cancelled for:', user.email, 'Sub ID:', subscription.id);
+    // Update user entity with cancellation date
+    await base44.auth.updateMe({
+      subscription_cancel_at: updatedSubscription.current_period_end,
+    });
+
+    console.log('Subscription cancelled for:', user.email, 'Sub ID:', subscription.id, 'Ends at:', updatedSubscription.current_period_end);
 
     return Response.json({
       success: true,
       message: 'Subscription will cancel at the end of the billing period',
-      cancel_at: subscription.current_period_end,
+      cancel_at: updatedSubscription.current_period_end,
     });
   } catch (error) {
     console.error('Cancel subscription error:', error);
