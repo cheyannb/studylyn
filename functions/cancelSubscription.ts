@@ -13,9 +13,11 @@ Deno.serve(async (req) => {
       return Response.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    if (user.subscription_type !== 'monthly') {
-      console.error('Not a monthly subscriber:', user.email);
-      return Response.json({ error: 'Not a monthly subscriber' }, { status: 400 });
+    console.log('User subscription_type:', user.subscription_type);
+
+    if (!user.subscription_type || user.subscription_type !== 'monthly') {
+      console.error('Not a monthly subscriber:', user.email, 'Type:', user.subscription_type);
+      return Response.json({ error: 'Only monthly subscriptions can be cancelled. Lifetime subscriptions do not require cancellation.' }, { status: 400 });
     }
 
     // Find the subscription by customer email
