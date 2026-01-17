@@ -72,12 +72,15 @@ export default function Pricing() {
 
       if (response.data?.success) {
         toast.success('Subscription cancelled. You will retain access until the end of your billing period.');
+        // Refresh user data
+        const updatedUser = await base44.auth.me();
+        setUser(updatedUser);
       } else {
         toast.error(response.data?.error || 'Failed to cancel subscription');
       }
     } catch (error) {
       console.error('Cancel error:', error);
-      toast.error('Failed to cancel subscription');
+      toast.error(error.response?.data?.error || error.message || 'Failed to cancel subscription');
     } finally {
       setIsCancelling(false);
     }
