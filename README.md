@@ -1,39 +1,42 @@
-**Welcome to your Base44 project** 
+# StudyLyn
 
-**About**
+**StudyLyn** is a modern, web-based flashcard and study platform designed to help students and lifelong learners master new subjects through active recall and organized study sets.
 
-View and Edit  your app on [Base44.com](http://Base44.com) 
+## 🚀 Features
 
-This project contains everything you need to run your app locally.
+* **Custom Study Sets:** Create, manage, and categorize digital flashcards (e.g., Languages, Science, History).
+* **Daily Goals:** Stay motivated with a visual progress tracker and a daily card-completion target.
+* **Study Streaks:** Build consistent habits with built-in streak tracking for consecutive study days.
+* **Practice Tests:** Test your knowledge with dedicated practice modes to prepare for exams.
+* **Global Leaderboard:** Compete with other learners and climb the ranks based on your study activity.
+* **Explore:** Discover public study sets created by the community to jumpstart your learning.
 
-**Edit the code in your local development environment**
+## 🛠️ Getting Started
 
-Any change pushed to the repo will also be reflected in the Base44 Builder.
+### Prerequisites
 
-**Prerequisites:** 
+* A modern web browser (Chrome, Firefox, Safari, or Edge).
+* An account to sync your progress across devices.
 
-1. Clone the repository using the project's Git URL 
-2. Navigate to the project directory
-3. Install dependencies: `npm install`
-4. Create an `.env.local` file and set the right environment variables
+### Quick Start
 
-```
-VITE_BASE44_APP_ID=your_app_id
-VITE_BASE44_APP_BASE_URL=your_backend_url
+1. **Sign Up/Login:** Create your profile to start tracking your sessions.
+2. **Create a Set:** Click the **+ New Set** button on your dashboard.
+3. **Add Cards:** Input your terms and definitions.
+4. **Study:** Use the "Practice" or "Study" mode to review your cards.
 
-e.g.
-VITE_BASE44_APP_ID=cbef744a8545c389ef439ea6
-VITE_BASE44_APP_BASE_URL=https://my-to-do-list-81bfaad7.base44.app
-```
+## 📊 Dashboard Overview
 
-Run the app: `npm run dev`
+The user dashboard provides a high-level view of your academic progress:
 
-**Publish your changes**
+* **Total Sets:** Number of subjects you are currently mastering.
+* **Cards Studied:** Cumulative count of cards reviewed.
+* **Day Streak:** Your current record for consecutive days studied.
+* **Sessions:** Total number of focused study periods completed.
 
-Open [Base44.com](http://Base44.com) and click on Publish.
+## 💎 Premium Features
 
-**Docs & Support**
+Upgrade to **StudyLyn Premium** for an enhanced experience, including:
 
-Documentation: [https://docs.base44.com/Integrations/Using-GitHub](https://docs.base44.com/Integrations/Using-GitHub)
-
-Support: [https://app.base44.com/support](https://app.base44.com/support)
+* More practice tests.
+* AI-powered flashcards
