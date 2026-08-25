@@ -1,0 +1,36 @@
+{
+  "name": "FlashcardSet",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Title of the flashcard set"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the set"
+    },
+    "is_public": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the set is publicly visible"
+    },
+    "category": {
+      "type": "string",
+      "description": "Category of the set"
+    },
+    "card_count": {
+      "type": "number",
+      "default": 0,
+      "description": "Number of cards in the set"
+    },
+    "times_studied": {
+      "type": "number",
+      "default": 0,
+      "description": "Number of times this set was studied"
+    }
+  },
+  "required": [
+    "title"
+  ]
+}

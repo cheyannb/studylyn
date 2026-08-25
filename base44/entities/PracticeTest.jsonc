@@ -1,0 +1,64 @@
+{
+  "name": "PracticeTest",
+  "type": "object",
+  "properties": {
+    "category": {
+      "type": "string",
+      "enum": [
+        "LSAT",
+        "NCLEX",
+        "SAT"
+      ],
+      "description": "Test category"
+    },
+    "test_number": {
+      "type": "number",
+      "description": "Test number (1-10)"
+    },
+    "question_number": {
+      "type": "number",
+      "description": "Question number within test (1-50)"
+    },
+    "question": {
+      "type": "string",
+      "description": "The question text"
+    },
+    "options": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Answer options"
+    },
+    "correct_answer": {
+      "type": "number",
+      "description": "Index of correct answer (0-3)"
+    },
+    "explanation": {
+      "type": "string",
+      "description": "Explanation of the answer"
+    },
+    "is_premium": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether this test requires premium"
+    },
+    "difficulty": {
+      "type": "string",
+      "enum": [
+        "easy",
+        "medium",
+        "hard"
+      ],
+      "default": "medium"
+    }
+  },
+  "required": [
+    "category",
+    "test_number",
+    "question_number",
+    "question",
+    "options",
+    "correct_answer"
+  ]
+}

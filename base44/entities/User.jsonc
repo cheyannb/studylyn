@@ -1,0 +1,72 @@
+{
+  "name": "User",
+  "type": "object",
+  "properties": {
+    "study_streak": {
+      "type": "number",
+      "default": 0,
+      "description": "Number of consecutive days studied"
+    },
+    "total_cards_studied": {
+      "type": "number",
+      "default": 0,
+      "description": "Total number of cards studied"
+    },
+    "cards_studied_today": {
+      "type": "number",
+      "default": 0,
+      "description": "Cards studied today"
+    },
+    "daily_goal": {
+      "type": "number",
+      "default": 20,
+      "description": "Daily study goal"
+    },
+    "subscription_type": {
+      "type": "string",
+      "enum": [
+        "monthly",
+        "lifetime"
+      ],
+      "description": "User subscription type"
+    },
+    "subscription_start": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When subscription started"
+    },
+    "subscription_cancel_at": {
+      "type": "number",
+      "description": "Unix timestamp when subscription will be cancelled"
+    },
+    "points": {
+      "type": "number",
+      "default": 0,
+      "description": "Total points earned"
+    },
+    "level": {
+      "type": "number",
+      "default": 1,
+      "description": "Current level"
+    },
+    "badges": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [],
+      "description": "Array of earned badge IDs"
+    },
+    "last_study_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Last date user studied"
+    }
+  },
+  "required": [
+    "subscription_type",
+    "subscription_start",
+    "subscription_cancel_at",
+    "last_study_date"
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "name": "StudySession",
+  "type": "object",
+  "properties": {
+    "set_id": {
+      "type": "string",
+      "description": "ID of the flashcard set studied"
+    },
+    "mode": {
+      "type": "string",
+      "enum": [
+        "flashcard",
+        "learn",
+        "test"
+      ],
+      "description": "Study mode used"
+    },
+    "cards_studied": {
+      "type": "number",
+      "default": 0
+    },
+    "correct_answers": {
+      "type": "number",
+      "default": 0
+    },
+    "incorrect_answers": {
+      "type": "number",
+      "default": 0
+    },
+    "duration_seconds": {
+      "type": "number",
+      "default": 0
+    },
+    "completed": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": [
+    "set_id",
+    "mode"
+  ]
+}
